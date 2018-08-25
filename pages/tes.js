@@ -5,7 +5,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 
 export default () => (
-  <Layout>
+  <Layout title="tes" description="tes">
     <div style={{ marginTop: 100 }}>
       <Form layout='horizontal'>
         <FormItem
