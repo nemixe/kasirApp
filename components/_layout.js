@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Proptypes from 'prop-types'
 import Link from 'next/link'
 
-export default class extends React.Component {
+class Layout extends React.Component {
   render() {
     return (
       <div role="main">
@@ -25,3 +25,10 @@ export default class extends React.Component {
     )
   }
 }
+
+Layout.propTypes = {
+  title: Proptypes.string.isRequired,
+  description: Proptypes.string.isRequired
+}
+
+export default Layout

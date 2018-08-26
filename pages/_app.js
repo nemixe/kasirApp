@@ -2,7 +2,6 @@ import App, { Container } from 'next/app'
 import withNProgress from 'next-nprogress'
 import NProgressStyles from 'next-nprogress/styles'
 
-
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
@@ -32,11 +31,13 @@ class MyApp extends App {
     const { pageProps, Component } = this.props
     return (
       <Container>
-        <NProgressStyles color="#29d" spinner={false} />
+        <NProgressStyles color="#b532e5" spinner={false} />
         <Component {...pageProps} />
       </Container>
     )
   }
 }
 
-export default withNProgress(50)(MyApp)
+const delay = 200
+
+export default withNProgress(delay)(MyApp)
