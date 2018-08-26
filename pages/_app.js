@@ -2,22 +2,6 @@ import App, { Container } from 'next/app'
 import withNProgress from 'next-nprogress'
 import NProgressStyles from 'next-nprogress/styles'
 
-// import Router from 'next/router'
-// import NProgress from 'nprogress'
-// import '../styles/_nprogress.css'
-
-// Router.events.on('routeChangeStart', (url) => {
-//   console.log(`loading: ${url}`)
-//   NProgress.start()
-// })
-// Router.events.on('routeChangeComplete', () => NProgress.done())
-// Router.events.on('routeChangeError', () => NProgress.done())
-// Router.onRouteChangeStart((url) => {
-//   console.log(`loading: ${url}`)
-//   NProgress.start()
-// })
-// Router.onRouteChangeComplete(() => NProgress.done())
-// Router.onRouteChangeError(() => NProgress.done())
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -27,6 +11,22 @@ class MyApp extends App {
     return { pageProps }
   }
 
+  componentDidMount() {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      typeof window !== 'undefined' &&
+      'serviceWorker' in navigator
+    ) {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(function (reg) {
+          console.log('Service worker registered (0-0) ')
+        })
+        .catch(function (e) {
+          console.error('Error during service worker registration:', e)
+        })
+    }
+  }
 
   render() {
     const { pageProps, Component } = this.props
