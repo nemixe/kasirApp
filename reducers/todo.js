@@ -1,9 +1,9 @@
 import { INCREMENT } from '../actions'
 
-export default (state = [], action) => {
-  switch (action) {
+export default (state = 0, action) => {
+  switch (action.type) {
     case INCREMENT:
-      return action.val++
+      return state + 1
       break;
 
     default:

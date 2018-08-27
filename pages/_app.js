@@ -31,12 +31,13 @@ class MyApp extends App {
 
   render() {
     const { pageProps, Component, store } = this.props
-    console.log(store)
     return (
-      <Container>
-        <NProgressStyles color="#b532e5" spinner={false} />
-        <Component {...pageProps} />
-      </Container>
+      <Provider store={store}>
+        <Container>
+          <NProgressStyles color="#b532e5" spinner={false} />
+          <Component {...pageProps} />
+        </Container>
+      </Provider>
     )
   }
 }

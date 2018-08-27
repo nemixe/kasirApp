@@ -1,8 +1,7 @@
 import { INCREMENT } from './'
 
-export function addTodo(val) {
+export function addTodo() {
   return {
-    type: INCREMENT,
-    val
+    type: INCREMENT
   }
 }
