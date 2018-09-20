@@ -1,6 +1,8 @@
 import App, { Container } from 'next/app'
 import withNProgress from 'next-nprogress'
 import NProgressStyles from 'next-nprogress/styles'
+import { Provider } from 'react-redux'
+import withRedux from 'next-redux-wrapper'
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -28,16 +30,22 @@ class MyApp extends App {
   }
 
   render() {
-    const { pageProps, Component } = this.props
+    const { pageProps, Component, store } = this.props
     return (
-      <Container>
-        <NProgressStyles color="#b532e5" spinner={false} />
-        <Component {...pageProps} />
-      </Container>
+      <Provider store={store}>
+        <Container>
+          <NProgressStyles color="#b532e5" spinner={false} />
+          <Component {...pageProps} />
+        </Container>
+      </Provider>
     )
   }
 }
 
 const delay = 200
 
-export default withNProgress(delay)(MyApp)
+import initialStore from '../utils/store'
+
+export default withRedux(initialStore, {
+  debug: typeof window != 'undefined' && process.env.NODE_ENV !== 'production'
+})(withNProgress(delay)(MyApp))

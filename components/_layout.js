@@ -17,6 +17,9 @@ class Layout extends React.Component {
           <Link href="/tes">
             <a>tes</a>
           </Link>
+          <Link href="/redux">
+            <a>redux</a>
+          </Link>
         </div>
 
         {this.props.children}
