@@ -4,6 +4,8 @@ import NProgressStyles from 'next-nprogress/styles'
 import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 
+import '../style/theme.less'
+
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}

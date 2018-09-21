@@ -1,4 +1,4 @@
-import { addTodo } from '../actions/todo'
+import { addTodo } from '../../actions/todo'
 import { connect } from 'react-redux'
 import { Button } from 'antd'
 class Redux extends React.Component {

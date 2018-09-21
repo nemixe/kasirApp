@@ -1,11 +1,11 @@
-const withCSS = require('@zeit/next-css')
+const withLESS = require('@zeit/next-less')
 const swPrecheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 if (typeof require !== 'undefined') {
-  require.extensions['.css'] = (file) => { }
+  require.extensions['.less'] = (file) => { }
 }
 
-module.exports = withCSS({
+module.exports = withLESS({
   webpack: (config) => {
     config.plugins.push(
       new swPrecheWebpackPlugin({

@@ -1,5 +1,5 @@
 import Document, { Head, Main, NextScript } from 'next/document'
-import 'antd/dist/antd.css'
+
 export default class extends Document {
   render() {
     return (
@@ -11,7 +11,6 @@ export default class extends Document {
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
 
-          <link rel='stylesheet' href='/_next/static/style.css' />
           <link rel="manifest" href="/static/manifest.webmanifest" />
           <link rel="shorcut icon" href="/static/icon.png" />
           <link rel="apple-touch-icon" href="/static/icon.png" />
