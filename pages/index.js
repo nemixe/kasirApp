@@ -39,8 +39,8 @@ export default class extends React.Component {
         .github {
           position: absolute;
           width: 70px;
-          bottom: 30px;
-          right: 30px;
+          bottom: 25px;
+          right: 35px;
         }
         `}</style>
       </Layout>
