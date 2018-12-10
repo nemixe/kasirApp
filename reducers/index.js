@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import Todo from './todo'
+import AuthToggle from './authToggle'
 
 export default combineReducers({
-  Todo
+  isLoggedIn: AuthToggle
 })

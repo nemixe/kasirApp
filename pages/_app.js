@@ -1,14 +1,29 @@
 import App, { Container } from 'next/app'
 import withNProgress from 'next-nprogress'
-import NProgressStyles from 'next-nprogress/styles'
+import NProgressComponent from 'next-nprogress/component'
 import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
-
+import jwt from 'jsonwebtoken'
+import { authToggle } from '../actions/actions'
 import '../style/theme.less'
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
+    const { req, isServer } = ctx
+
+    if (isServer) {
+      const cookie = req.headers.cookie ? req.headers.cookie.split('=')[1] : ''
+      jwt.verify(cookie, '1n1p455w0rd', (err, decoded) => {
+        if (err) {
+          ctx.store.dispatch(authToggle(false))
+          return
+        }
+        ctx.store.dispatch(authToggle(true))
+      })
+    }
+
+
     if (Component.getInitialProps) pageProps = await Component.getInitialProps(ctx)
 
     return { pageProps }
@@ -36,7 +51,7 @@ class MyApp extends App {
     return (
       <Provider store={store}>
         <Container>
-          <NProgressStyles color="#b532e5" spinner={false} />
+          <NProgressComponent color="#b532e5" spinner={false} />
           <Component {...pageProps} />
         </Container>
       </Provider>

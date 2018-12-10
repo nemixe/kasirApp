@@ -1,6 +1,6 @@
 import Layout from '../components/_layout'
 import { redirectIfnotAuthenticated, isAuthenticated } from '../utils/authService'
-class Index extends React.Component {
+class List extends React.Component {
   static async getInitialProps(ctx) {
     if (redirectIfnotAuthenticated(ctx)) {
       return {}
@@ -9,16 +9,15 @@ class Index extends React.Component {
       authenticated: isAuthenticated(ctx)
     }
   }
-
   render() {
     return (
-      <Layout title="Kasir" description="index page" auth={this.props.authenticated}>
+      <Layout title="List History" description="this page is a about list of the history" auth={this.props.authenticated}>
         <div className="container">
-          Index Page
-        </div>
+          list history page
+      </div>
       </Layout>
     )
+
   }
 }
-
-export default Index
+export default List

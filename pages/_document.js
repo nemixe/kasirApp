@@ -1,6 +1,7 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class extends Document {
+
   render() {
     return (
       <html lang="id">
@@ -15,8 +16,10 @@ export default class extends Document {
           <link rel="shorcut icon" href="/static/icon.png" />
           <link rel="apple-touch-icon" href="/static/icon.png" />
         </Head>
-        <Main />
-        <NextScript />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
       </html>
     )
   }

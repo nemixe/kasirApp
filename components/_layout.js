@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Proptypes from 'prop-types'
+import Navbar from './navbar'
 
 class Layout extends React.Component {
+
   render() {
     return (
       <div role="main">
@@ -9,7 +11,7 @@ class Layout extends React.Component {
           <title>{this.props.title}</title>
           <meta name="description" content={this.props.description} />
         </Head>
-
+        <Navbar auth={this.props.auth} />
         {this.props.children}
 
       </div>

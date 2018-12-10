@@ -1,1 +1,1 @@
-export const INCREMENT = 'INCREMENT'
+export const AUTH_TOGGLE = 'AUTH_TOGGLE'
