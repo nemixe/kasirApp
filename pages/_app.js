@@ -5,24 +5,26 @@ import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import jwt from 'jsonwebtoken'
 import { authToggle } from '../actions/actions'
+import { getJwt } from '../utils/authService'
 import '../style/theme.less'
+import { setToken } from '../actions/actions'
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
-    const { req, isServer } = ctx
 
-    if (isServer) {
-      const cookie = req.headers.cookie ? req.headers.cookie.split('=')[1] : ''
-      jwt.verify(cookie, '1n1p455w0rd', (err, decoded) => {
-        if (err) {
-          ctx.store.dispatch(authToggle(false))
-          return
-        }
-        ctx.store.dispatch(authToggle(true))
-      })
-    }
+    const { token } = ctx.store.getState()
 
+    !!getJwt(ctx) && !!token && ctx.store.dispatch(setToken(getJwt(ctx)))
+
+
+    jwt.verify(getJwt(ctx), '1n1p455w0rd', (err, decoded) => {
+      if (err) {
+        ctx.store.dispatch(authToggle(false))
+        return
+      }
+      ctx.store.dispatch(authToggle(true))
+    })
 
     if (Component.getInitialProps) pageProps = await Component.getInitialProps(ctx)
 
@@ -48,10 +50,11 @@ class MyApp extends App {
 
   render() {
     const { pageProps, Component, store } = this.props
+
     return (
       <Provider store={store}>
         <Container>
-          <NProgressComponent color="#b532e5" spinner={false} />
+          <NProgressComponent color="#5b8cff" spinner={false} />
           <Component {...pageProps} />
         </Container>
       </Provider>
@@ -60,9 +63,9 @@ class MyApp extends App {
 }
 
 const delay = 200
-
+const setting = { showSpinner: false }
 import initialStore from '../utils/store'
 
 export default withRedux(initialStore, {
   debug: typeof window != 'undefined' && process.env.NODE_ENV !== 'production'
-})(withNProgress(delay)(MyApp))
+})(withNProgress(delay, setting)(MyApp))

@@ -12,6 +12,8 @@ class Logout extends React.Component {
   }
 }
 
+function mapStateToProps() {
+  return {}
+}
 
-
-export default connect(() => { }, { authToggle })(Logout)
+export default connect(mapStateToProps, { authToggle })(Logout)

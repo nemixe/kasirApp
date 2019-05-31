@@ -16,7 +16,7 @@ export default class extends Document {
           <link rel="shorcut icon" href="/static/icon.png" />
           <link rel="apple-touch-icon" href="/static/icon.png" />
         </Head>
-        <body>
+        <body style={{ overflowY: 'scroll' }}>
           <Main />
           <NextScript />
         </body>

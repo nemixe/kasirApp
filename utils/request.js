@@ -1,11 +1,7 @@
-import axios from 'axios'
-
-const API_HOST = "http://192.168.1.4:8080"
-
-const getUrl = (endpoint) => API_HOST + endpoint
+import axiosHelper from './axiosHelper'
 
 export const post = async (endpoint, data) => {
-  return axios.post(getUrl(endpoint), data, {
+  return await axiosHelper.post(endpoint, data, {
     headers: { "Content-Type": "application/json" }
   })
 }
@@ -16,5 +12,5 @@ export const get = async (endpoint, jwt) => {
       headers: { Authorization: `Bearer ${jwt}` }
     }
     : null
-  return axios.get(getUrl(endpoint), headers)
+  return await axiosHelper.get(endpoint, headers)
 }

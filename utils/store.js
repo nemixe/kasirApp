@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux'
-
+import thunk from 'redux-thunk'
 import rootReducers from '../reducers'
 
 const enhancers = compose(
@@ -8,6 +8,6 @@ const enhancers = compose(
     : f => f
 )
 
-const createStoreWithMiddleware = applyMiddleware()(createStore)
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 
 export default initialState => createStoreWithMiddleware(rootReducers, initialState, enhancers)

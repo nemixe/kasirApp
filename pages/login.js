@@ -1,13 +1,18 @@
+import { Form, Input, Button, Row, Col, message } from 'antd'
 import Layout from '../components/_layout'
 import { signIn, redirectIfAuthenticated, isAuthenticated, getJwt } from '../utils/authService'
 import { connect } from 'react-redux'
 import { authToggle } from '../actions/actions'
+import { Link } from '../routes'
+
+const FormItem = Form.Item
 
 class Login extends React.Component {
   static async getInitialProps(ctx) {
     if (redirectIfAuthenticated(ctx)) {
       return {}
     }
+
     return {
       authenticated: isAuthenticated(ctx)
     }
@@ -15,21 +20,20 @@ class Login extends React.Component {
 
   constructor() {
     super()
-    this.submitRegistration = this.submitRegistration.bind(this)
+    this.loginHandler = this.loginHandler.bind(this)
     this.state = {
       error: null
     }
   }
 
-  submitRegistration = async e => {
+  loginHandler = async e => {
     e.preventDefault()
     const email = this.refs.email.value
     const password = this.refs.password.value
 
     const error = await signIn(email, password)
     if (error) {
-      this.setState({ error })
-      return false
+      return message.error(error)
     }
     this.props.authToggle(true)
   }
@@ -37,15 +41,31 @@ class Login extends React.Component {
   render() {
     return (
       <Layout title="Login" description="login page" auth={this.props.authenticated}>
-        <div className="container">
-          <form onSubmit={this.submitRegistration}>
-            <label htmlFor="email">Email</label>
-            <input type="text" name="email" ref="email" />
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" ref="password" />
-            <input type="submit" value="Submit"></input>
-          </form>
-        </div>
+
+        <h1>
+          Login
+        </h1>
+
+        {this.state.error ? <div>{this.state.error}</div> : null}
+        <Row type="flex" align="middle">
+          <Col span={10}>
+            <Form onSubmit={this.loginHandler}>
+              <FormItem>
+                <input placeholder="Email" type="text" name="email" ref="email" className="ant-input" />
+              </FormItem>
+              <FormItem>
+                <input placeholder="Password" type="password" name="password" ref="password" className="ant-input" />
+              </FormItem>
+              <FormItem>
+                <Button type="primary" htmlType="submit">Login</Button>
+              </FormItem>
+            </Form>
+          </Col>
+        </Row>
+
+        <Link route="/register">
+          <a>Register</a>
+        </Link>
       </Layout>
     )
   }

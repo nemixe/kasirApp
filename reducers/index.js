@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux'
 
-import AuthToggle from './authToggle'
+import authToggle from './authToggle'
+import addTransaksi from './addTransaksi'
+import setToken from './setToken'
+import dataTransaksi from './dataTransaksi'
 
 export default combineReducers({
-  isLoggedIn: AuthToggle
+  isLoggedIn: authToggle,
+  transaksi: addTransaksi,
+  token: setToken,
+  dataTransaksi: dataTransaksi
 })

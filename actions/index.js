@@ -1,1 +1,6 @@
 export const AUTH_TOGGLE = 'AUTH_TOGGLE'
+export const ADD_TRANSAKSI = 'ADD_TRANSAKSI'
+export const DELETE_TRANSAKSI = 'DELETE_TRANSAKSI'
+export const SET_TOKEN = 'SET_TOKEN'
+export const GET_DATA_TRANSAKSI = 'GET_DATA_TRANSAKSI'
+export const GET_DATA_BUKU = 'GET_DATA_BUKU'

@@ -1,4 +1,4 @@
-import { authenticate } from '../services/authApi'
+import { authenticate, newUser } from '../services/authApi'
 import redirect from './redirect'
 import { setCookie, removeCookie, getCookie } from './session'
 
@@ -11,6 +11,18 @@ export const signIn = async (email, password) => {
 
   setCookie('jwt', res.tokenID)
   redirect('/index')
+  return null
+}
+
+export const signUp = async (email, password) => {
+  const res = await newUser(email, password)
+
+  if (!res.data) {
+    return res
+  }
+
+  setCookie('success', `email ${email} was created.`)
+  redirect('/login')
   return null
 }
 
